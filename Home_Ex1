@@ -1,0 +1,568 @@
+import turtle
+b=turtle.Turtle()
+b.speed(40)
+b.color("blue")
+for i in range(0,100):
+    b.circle(i+i)
+    b.left(i)
+turtle.done()
+////////////////////////////////////////////////////////////////////////////////
+# Python program to user input pattern
+# using Turtle Programming
+import turtle  # Outside_In
+import turtle
+import time
+import random
+
+print("This program draws shapes based on the number you enter in a uniform pattern.")
+num_str = input("Enter the side number of the shape you want to draw: ")
+if num_str.isdigit():
+    squares = int(num_str)
+
+angle = 180 - 180 * (squares - 2) / squares
+
+turtle.up
+
+x = 0
+y = 0
+turtle.setpos(x, y)
+
+numshapes = 8
+for x in range(numshapes):
+    turtle.color(random.random(), random.random(), random.random())
+    x += 5
+    y += 5
+    turtle.forward(x)
+    turtle.left(y)
+    for i in range(squares):
+        turtle.begin_fill()
+        turtle.down()
+        turtle.forward(40)
+        turtle.left(angle)
+        turtle.forward(40)
+        print(turtle.pos())
+        turtle.up()
+        turtle.end_fill()
+
+time.sleep(11)
+turtle.bye()
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+# Python program to draw  
+# Spiral  Helix Pattern 
+# using Turtle Programming 
+  
+import turtle 
+loadWindow = turtle.Screen() 
+turtle.speed(2) 
+  
+for i in range(100): 
+    turtle.circle(5*i) 
+    turtle.circle(-5*i) 
+    turtle.left(i) 
+  
+turtle.exitonclick()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+from turtle import *
+import random
+
+for n in range(60):
+    penup()
+    goto(random.randint(-400, 400), random.randint(-400, 400))
+    pendown()
+
+    red_amount   = random.randint( 0,  30) / 100.0
+    blue_amount  = random.randint(50, 100) / 100.0
+    green_amount = random.randint( 0,  30) / 100.0
+    pencolor((red_amount, green_amount, blue_amount))
+
+    circle_size = random.randint(10, 40)
+    pensize(random.randint(1, 5))
+
+    for i in range(6):
+        circle(circle_size)
+        left(60)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#!/usr/bin/env python3
+
+import sys
+import turtle
+
+def border(t, screen_x, screen_y):
+    """(Turtle, int, int)
+
+    Draws a border around the canvas in red.
+    """
+    # Lift the pen and move the turtle to the center.
+    t.penup()
+    t.home()
+
+    # Move to lower left corner of the screen; leaves the turtle
+    # facing west.
+    t.forward(screen_x / 2)
+    t.right(90)
+    t.forward(screen_y / 2)
+    t.setheading(180)           # t.right(90) would also work.
+    
+    # Draw the border
+    t.pencolor('red')
+    t.pendown()
+    t.pensize(10)
+    for distance in (screen_x, screen_y, screen_x, screen_y):
+        t.forward(distance)
+        t.right(90)
+
+    # Raise the pen and move the turtle home again; it's a good idea
+    # to leave the turtle in a known state.
+    t.penup()
+    t.home()
+
+def square(t, size, color):
+    """(Turtle, int, str)
+
+    Draw a square of the chosen colour and size.
+    """
+    t.pencolor(color)
+    t.pendown()
+    for i in range(4):
+        t.forward(size)
+        t.right(90)
+
+def main():
+    # Create screen and turtle.
+    screen = turtle.Screen()
+    screen.title('Square Demo')
+    screen_x, screen_y = screen.screensize()
+    t = turtle.Turtle()
+
+    # Uncomment to draw the graphics as quickly as possible.
+    ##t.speed(0)
+
+    # Draw a border around the canvas
+    border(t, screen_x, screen_y)
+
+    # Draw a set of nested squares, varying the color.
+    # The squares are 10%, 20%, etc. of half the size of the canvas.
+    colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet']
+    t.pensize(3)
+    for i, color in enumerate(colors):
+        square(t, (screen_y / 2) / 10 * (i+1), color)
+
+    print('Hit any key to exit')
+    dummy = input()
+        
+if __name__ == '__main__':
+    main()
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#!/usr/bin/env python3
+
+import math
+from turtle import *
+
+# The gravitational constant G
+G = 6.67428e-11
+
+# Assumed scale: 100 pixels = 1AU.
+AU = (149.6e6 * 1000)     # 149.6 million km, in meters.
+SCALE = 250 / AU
+
+class Body(Turtle):
+    """Subclass of Turtle representing a gravitationally-acting body.
+
+    Extra attributes:
+    mass : mass in kg
+    vx, vy: x, y velocities in m/s
+    px, py: x, y positions in m
+    """
+    
+    name = 'Body'
+    mass = None
+    vx = vy = 0.0
+    px = py = 0.0
+    
+    def attraction(self, other):
+        """(Body): (fx, fy)
+
+        Returns the force exerted upon this body by the other body.
+        """
+        # Report an error if the other object is the same as this one.
+        if self is other:
+            raise ValueError("Attraction of object %r to itself requested"
+                             % self.name)
+
+        # Compute the distance of the other body.
+        sx, sy = self.px, self.py
+        ox, oy = other.px, other.py
+        dx = (ox-sx)
+        dy = (oy-sy)
+        d = math.sqrt(dx**2 + dy**2)
+
+        # Report an error if the distance is zero; otherwise we'll
+        # get a ZeroDivisionError exception further down.
+        if d == 0:
+            raise ValueError("Collision between objects %r and %r"
+                             % (self.name, other.name))
+
+        # Compute the force of attraction
+        f = G * self.mass * other.mass / (d**2)
+
+        # Compute the direction of the force.
+        theta = math.atan2(dy, dx)
+        fx = math.cos(theta) * f
+        fy = math.sin(theta) * f
+        return fx, fy
+
+def update_info(step, bodies):
+    """(int, [Body])
+    
+    Displays information about the status of the simulation.
+    """
+    print('Step #{}'.format(step))
+    for body in bodies:
+        s = '{:<8}  Pos.={:>6.2f} {:>6.2f} Vel.={:>10.3f} {:>10.3f}'.format(
+            body.name, body.px/AU, body.py/AU, body.vx, body.vy)
+        print(s)
+    print()
+
+def loop(bodies):
+    """([Body])
+
+    Never returns; loops through the simulation, updating the
+    positions of all the provided bodies.
+    """
+    timestep = 24*3600  # One day
+    
+    for body in bodies:
+        body.penup()
+        body.hideturtle()
+
+    step = 1
+    while True:
+        update_info(step, bodies)
+        step += 1
+
+        force = {}
+        for body in bodies:
+            # Add up all of the forces exerted on 'body'.
+            total_fx = total_fy = 0.0
+            for other in bodies:
+                # Don't calculate the body's attraction to itself
+                if body is other:
+                    continue
+                fx, fy = body.attraction(other)
+                total_fx += fx
+                total_fy += fy
+
+            # Record the total force exerted.
+            force[body] = (total_fx, total_fy)
+
+        # Update velocities based upon on the force.
+        for body in bodies:
+            fx, fy = force[body]
+            body.vx += fx / body.mass * timestep
+            body.vy += fy / body.mass * timestep
+
+            # Update positions
+            body.px += body.vx * timestep
+            body.py += body.vy * timestep
+            body.goto(body.px*SCALE, body.py*SCALE)
+            body.dot(3)
+
+
+def main():
+    sun = Body()
+    sun.name = 'Sun'
+    sun.mass = 1.98892 * 10**30
+    sun.pencolor('yellow')
+
+    earth = Body()
+    earth.name = 'Earth'
+    earth.mass = 5.9742 * 10**24
+    earth.px = -1*AU
+    earth.vy = 29.783 * 1000            # 29.783 km/sec
+    earth.pencolor('blue')
+
+    # Venus parameters taken from
+    # http://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html
+    venus = Body()
+    venus.name = 'Venus'
+    venus.mass = 4.8685 * 10**24
+    venus.px = 0.723 * AU
+    venus.vy = -35.02 * 1000
+    venus.pencolor('red')
+
+    loop([sun, earth, venus])
+
+if __name__ == '__main__':
+    main()
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#!/usr/bin/env python3
+
+# life.py -- A turtle-based version of Conway's Game of Life.
+#
+# An empty board will be displayed, and the following commands are available:
+#  E : Erase the board
+#  R : Fill the board randomly
+#  S : Step for a single generation
+#  C : Update continuously until a key is struck
+#  Q : Quit
+#  Cursor keys :  Move the cursor around the board
+#  Space or Enter : Toggle the contents of the cursor's position
+#
+
+import sys
+import turtle
+import random
+
+CELL_SIZE = 10                  # Measured in pixels
+
+class LifeBoard:
+    """Encapsulates a Life board
+
+    Attributes:
+    xsize, ysize : horizontal and vertical size of the board
+    state : set containing (x,y) coordinates for live cells.
+
+    Methods:
+    display(update_board) -- Display the state of the board on-screen.
+    erase() -- clear the entire board
+    makeRandom() -- fill the board randomly
+    set(x,y) -- set the given cell to Live; doesn't refresh the screen
+    toggle(x,y) -- change the given cell from live to dead, or vice
+                   versa, and refresh the screen display
+
+    """
+    def __init__(self, xsize, ysize):
+        """Create a new LifeBoard instance.
+
+        scr -- curses screen object to use for display
+        char -- character used to render live cells (default: '*')
+        """
+        self.state = set()
+        self.xsize, self.ysize = xsize, ysize
+
+    def is_legal(self, x, y):
+        "Returns true if the x,y coordinates are legal for this board."
+        return (0 <= x < self.xsize) and (0 <= y < self.ysize)
+
+    def set(self, x, y):
+        """Set a cell to the live state."""
+        if not self.is_legal(x, y):
+            raise ValueError("Coordinates {}, {} out of range 0..{}, 0..{}".format(
+                    x, y, self.xsize, self.ysize))
+                             
+        key = (x, y)
+        self.state.add(key)
+
+    def makeRandom(self):
+        "Fill the board with a random pattern"
+        self.erase()
+        for i in range(0, self.xsize):
+            for j in range(0, self.ysize):
+                if random.random() > 0.5:
+                    self.set(i, j)
+
+    def toggle(self, x, y):
+        """Toggle a cell's state between live and dead."""
+        if not self.is_legal(x, y):
+            raise ValueError("Coordinates {}, {} out of range 0..{}, 0..{}".format(
+                    x, y, self.xsize, self.ysize))
+        key = (x, y)
+        if key in self.state:
+            self.state.remove(key)
+        else:
+            self.state.add(key)
+
+    def erase(self):
+        """Clear the entire board."""
+        self.state.clear()
+
+    def step(self):
+        "Compute one generation, updating the display."
+        d = set()
+        for i in range(self.xsize):
+            x_range = range( max(0, i-1), min(self.xsize, i+2) )
+            for j in range(self.ysize):
+                s = 0
+                live = ((i,j) in self.state)
+                for yp in range( max(0, j-1), min(self.ysize, j+2) ):
+                    for xp in x_range:
+                        if (xp, yp) in self.state:
+                            s += 1
+
+                # Subtract the central cell's value; it doesn't count.
+                s -= live             
+                ##print(d)
+                ##print(i, j, s, live)
+                if s == 3:
+                    # Birth
+                    d.add((i,j))
+                elif s == 2 and live: 
+                    # Survival
+                    d.add((i,j))
+                elif live:
+                    # Death
+                    pass
+
+        self.state = d
+
+    #
+    # Display-related methods
+    #                    
+    def draw(self, x, y):
+        "Update the cell (x,y) on the display."
+        turtle.penup()
+        key = (x, y)
+        if key in self.state:
+            turtle.setpos(x*CELL_SIZE, y*CELL_SIZE)
+            turtle.color('black')
+            turtle.pendown()
+            turtle.setheading(0)
+            turtle.begin_fill()
+            for i in range(4):
+                turtle.forward(CELL_SIZE-1)
+                turtle.left(90)
+            turtle.end_fill()
+            
+    def display(self):
+        """Draw the whole board"""
+        turtle.clear()
+        for i in range(self.xsize):
+            for j in range(self.ysize):
+                self.draw(i, j)
+        turtle.update()
+
+
+def display_help_window():
+    from turtle import TK
+    root = TK.Tk()
+    frame = TK.Frame()
+    canvas = TK.Canvas(root, width=300, height=200, bg="white")
+    canvas.pack()
+    help_screen = turtle.TurtleScreen(canvas)
+    help_t = turtle.RawTurtle(help_screen)
+    help_t.penup()
+    help_t.hideturtle()
+    help_t.speed('fastest')
+
+    width, height = help_screen.screensize()
+    line_height = 20
+    y = height // 2 - 30
+    for s in ("Click on cells to make them alive or dead.",
+              "Keyboard commands:",
+              " E)rase the board",
+              " R)andom fill",
+              " S)tep once or",
+              " C)ontinuously -- use 'S' to resume stepping",
+              " Q)uit"):
+        help_t.setpos(-(width / 2), y)
+        help_t.write(s, font=('sans-serif', 14, 'normal'))
+        y -= line_height
+    
+
+def main():
+    display_help_window()
+
+    scr = turtle.Screen()
+    turtle.mode('standard')
+    xsize, ysize = scr.screensize()
+    turtle.setworldcoordinates(0, 0, xsize, ysize)
+
+    turtle.hideturtle()
+    turtle.speed('fastest')
+    turtle.tracer(0, 0)
+    turtle.penup()
+
+    board = LifeBoard(xsize // CELL_SIZE, 1 + ysize // CELL_SIZE)
+
+    # Set up mouse bindings
+    def toggle(x, y):
+        cell_x = x // CELL_SIZE
+        cell_y = y // CELL_SIZE
+        if board.is_legal(cell_x, cell_y):
+            board.toggle(cell_x, cell_y)
+            board.display()
+
+    turtle.onscreenclick(turtle.listen)
+    turtle.onscreenclick(toggle)
+
+    board.makeRandom()
+    board.display()
+
+    # Set up key bindings
+    def erase():
+        board.erase()
+        board.display()
+    turtle.onkey(erase, 'e')
+
+    def makeRandom():
+        board.makeRandom()
+        board.display()
+    turtle.onkey(makeRandom, 'r')
+
+    turtle.onkey(sys.exit, 'q')
+
+    # Set up keys for performing generation steps, either one-at-a-time or not.
+    continuous = False
+    def step_once():
+        nonlocal continuous
+        continuous = False
+        perform_step()
+
+    def step_continuous():
+        nonlocal continuous
+        continuous = True
+        perform_step()
+
+    def perform_step():
+        board.step()
+        board.display()
+        # In continuous mode, we set a timer to display another generation
+        # after 25 millisenconds.
+        if continuous:
+            turtle.ontimer(perform_step, 25)
+
+    turtle.onkey(step_once, 's')
+    turtle.onkey(step_continuous, 'c')
+
+    # Enter the Tk main loop
+    turtle.listen()
+    turtle.mainloop()
+
+if __name__ == '__main__':
+    main()
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import turtle
+t=turtle.Turtle()
+s=turtle.Screen()
+t.shape("turtle")
+t.width(10)
+t.pensize(10)
+t.penup()
+t.pendown()
+t.isdown()
+t.fillcolor("cyan")
+t.pencolor("#FF0000")
+t.forward(200)
+print(t.heading())
+turtle.done()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#Flower
+from turtle import  Turtle, Screen
+
+def drow_petal(turtle,radius):
+    heading=turtle.heading()
+    turtle.circle(radius,60)
+    turtle.left(120)
+    turtle.circle(radius,60)
+    turtle.setheading(heading)
+
+my_radius=int(input("what is the radius of the flower?"))
+my_petals=int(input("How many petals do you want"))
+bob=Turtle()
+for _ in range(my_petals):
+    drow_petal(bob,my_radius)
+    bob.left(360/my_petals)
+bob.hideturtle()
+screen=Screen()
+screen.exitonclick()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
