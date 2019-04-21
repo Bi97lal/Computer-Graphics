@@ -1,0 +1,205 @@
+#snowmanprogram.py drowing picture that have sun and tree with him
+#chauncey and vickram
+#sept 13
+
+###############################
+#   Setup program resources   #
+###############################
+#import turtle
+from turtle import *
+#create pen
+x=Turtle()
+#title drawing window
+title("snowman program.")
+#set pen speed
+x.speed("fastest")
+#hide pen
+x.hideturtle()
+#####
+#sky#
+#####
+x.color("light blue")
+x.begin_fill()
+x.goto(-1000,1000)
+x.goto(1000,1000)
+x.goto(1000,-1000)
+x.goto(-1000,-1000)
+x.goto(-1000,1000)
+x.end_fill()
+
+########
+#ground#
+########
+x.color("light green")
+x.begin_fill()
+x.goto(-1000,-200)
+x.goto(1000,-200)
+x.goto(1000,-1000)
+x.goto(-1000,-1000)
+x.goto(-1000,-200)
+x.end_fill()
+
+######
+#tree#
+######
+
+x.color("brown")
+x.begin_fill()
+x.up()
+x.goto(300,-210)
+x.down()
+x.goto(400,-210)
+x.goto(400,1000)
+x.goto(300,1000)
+x.goto(300,-210)
+x.end_fill()
+x.color("black")
+x.up()
+x.goto(350,150)
+x.down()
+x.begin_fill()
+x.circle(40)
+x.end_fill()
+
+#########
+#snowman#
+#########
+
+#set color to white
+x.color("white")
+#goto lower body start(lifted)
+x.up()
+x.goto(0,-250)
+x.down()
+#draw the lower body, ending at start of upper body
+x.begin_fill()
+x.circle(120)
+x.end_fill()
+x.circle(120,180)
+x.left(180)
+#draw upper body, ending at start of head
+x.begin_fill()
+x.circle(80)
+x.end_fill()
+x.circle(80,180)
+x.left(180)
+#draw head
+x.begin_fill()
+x.circle(50)
+x.end_fill()
+
+######################
+#    Draw the face   #
+######################
+
+#go to mouth (lifted)
+x.up()
+x.goto(0,165)
+x.down()
+#draw and fill the mouth
+x.color("black")
+x.begin_fill()
+x.circle(10)
+x.end_fill()
+#go to left eye (lifted)
+x.up()
+x.goto(-25,205)
+x.down()
+#draw and fill left eye
+x.color("black")
+x.begin_fill()
+x.circle(15)
+x.end_fill()
+#go to right eye(lifted)
+x.up()
+x.goto(25,205)
+x.down()
+#draw and fill right eye
+x.begin_fill()
+x.circle(15)
+x.end_fill()
+
+#tophat
+x.color("black")
+x.up()
+x.goto(-45,317)
+x.down()
+x.begin_fill()
+x.forward(90)
+x.right(90)
+x.forward(75)
+x.right(90)
+x.forward(90)
+x.right(90)
+x.forward(75)
+x.end_fill()
+x.up()
+x.goto(-100,240)
+x.down()
+x.width(10)
+x.goto(100,240)
+
+#right arm
+x.up()
+x.color("brown")
+x.goto(77,100)
+x.down()
+x.goto(160,100)
+x.right(50)
+x.forward(45)
+
+#left arm
+x.up()
+x.goto(-77,100)
+x.down()
+x.goto(-130,50)
+x.left(230)
+x.forward(45)
+
+#scarf
+x.width("20")
+x.color("red")
+x.up()
+x.goto(-35,140)
+x.left(45)
+x.down()
+x.circle(60,83)
+x.setheading(270)
+x.forward(80)
+
+#buttons
+x.up()
+x.goto(0,15)
+x.down()
+x.width(15)
+x.color("green")
+x.circle(1)
+x.up()
+x.goto(5,45)
+x.down()
+x.circle(1)
+x.up()
+x.goto(-3,75)
+x.down()
+x.circle(1)
+x.up()
+x.goto(0,105)
+x.down()
+x.circle(1)
+
+#
+#sun
+#
+x.up()
+x.goto(-400,200)
+x.down()
+x.color("orange")
+x.circle(80)
+x.goto(-400,202)
+x.color("yellow")
+x.begin_fill()
+x.circle(76)
+x.end_fill()
+
+#end program
+done()
