@@ -1,0 +1,49 @@
+from turtle import *
+m=Turtle()
+s=Screen()
+############################
+def ta(t_color,x,y):#دالة ترسم مثلث
+    m.setposition(x, y)
+    m.pendown()
+    m.color(t_color)
+    m.begin_fill()
+    m.forward(100)
+    m.left(120)
+    m.forward(100)
+    m.left(120)
+    m.forward(100)
+    m.end_fill()
+    m.penup()
+def start(t_color,x,y): #ترسم نجمة
+    m.setposition(x, y)
+    m.pendown()
+    m.color(t_color)
+    m.begin_fill()
+    for i in range(5):
+        m.forward(40)
+        m.left(145)
+    m.end_fill()
+    m.penup()
+def setcicle(t_color,x,y): #ترسم دائرة
+    m.setposition(x, y)
+    m.pendown()
+    m.color(t_color)
+    m.begin_fill()
+    m.circle(10)
+    m.end_fill()
+    m.penup()
+##########################
+m.speed(2)
+##########################
+ta("green",0,0)
+ta("green",50,130)
+ta("green",100,80)
+##########################
+start("red",30,170)
+##########################
+setcicle("#f54698",70,80)
+setcicle("#f54698",30,50)
+setcicle("#f54698",70,20)
+##########################
+m.hideturtle()
+s.exitonclick()
