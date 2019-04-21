@@ -1,0 +1,35 @@
+#drow circle insed circle
+
+import turtle
+t=turtle.Turtle()
+creeen=turtle.Screen()
+creeen.bgcolor("white")
+t.pensize(3)
+t.speed(1000)
+
+
+
+for i in range(313):
+    #t.color("white")
+    t.color("black")
+    t.fillcolor("black")
+    t.forward(1)
+    t.left(1.15)
+
+
+
+for i in range(313):
+    t.begin_fill()
+    t.color("yellow")
+    t.left(1.15)
+    t.forward(2)
+    t.end_fill()
+
+
+for i in range(313):
+    t.begin_fill()
+    t.color("blue")
+    t.left(1.15)
+    t.forward(3)
+    t.end_fill()
+turtle.done()
