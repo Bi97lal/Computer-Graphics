@@ -1,0 +1,21 @@
+#drow 4 circle using function:
+import turtle
+t=turtle.Turtle()
+def circles(x,y,color,rad):
+    t.penup()
+    t.goto(x,y)
+    t.pendown()
+    t.begin_fill()
+    t.fillcolor(color)
+    t.circle(rad)
+    t.end_fill()
+    t.hideturtle()
+
+
+circles(0,-50,"white",50)
+circles(200,200,"red",50)
+circles(200,-200,"black",50)
+circles(-200,-200,"orange",50)
+circles(-200,200,"blue",50)
+
+turtle.done()
