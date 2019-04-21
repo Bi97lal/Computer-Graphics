@@ -1,0 +1,24 @@
+# iraq flag
+# need "الله اكبر" ;
+import turtle
+def rectangle(color):
+    for i in range(2):
+        t.begin_fill()
+        t.fillcolor(color)
+        t.forward(400)
+        t.right(90)
+        t.forward(100)
+        t.right(90)
+        t.end_fill()
+t=turtle.Turtle()
+t.up()
+t.goto(0,-370)
+t.down()
+t.down()
+t.goto(0,300)
+rectangle("red")
+t.goto(0,200)
+rectangle("white")
+t.goto(0,100)
+rectangle("black")
+turtle.done()
